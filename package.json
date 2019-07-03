@@ -4,7 +4,7 @@
   "description": "Hypothetical version of tails.com internal pricing service",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/shektor/pricing-service/issues"
   },
-  "homepage": "https://github.com/shektor/pricing-service#readme"
+  "homepage": "https://github.com/shektor/pricing-service#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }
