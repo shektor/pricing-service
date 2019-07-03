@@ -1,0 +1,19 @@
+{
+  "name": "pricing-service",
+  "version": "1.0.0",
+  "description": "Hypothetical version of tails.com internal pricing service",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shektor/pricing-service.git"
+  },
+  "author": "Steven Hektor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shektor/pricing-service/issues"
+  },
+  "homepage": "https://github.com/shektor/pricing-service#readme"
+}
