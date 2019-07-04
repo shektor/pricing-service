@@ -4,7 +4,8 @@
   "description": "Hypothetical version of tails.com internal pricing service",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "lint": "eslint src spec",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
