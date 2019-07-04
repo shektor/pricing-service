@@ -12,3 +12,21 @@ describe('GET /', () => {
       })
   })
 })
+
+describe('POST /quotes', () => {
+  test('it returns 201 with JSON echo', (done) => {
+    let data = { 'order': {} }
+
+    request(app)
+      .post('/quotes')
+      .send(data)
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).toBe(201)
+        expect(res.body).toEqual(data)
+
+        if (err) throw done(err)
+        done()
+      })
+  })
+})
