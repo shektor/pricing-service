@@ -1,0 +1,13 @@
+{
+  "product": {
+    "1": { "price": 599, "vat_band": "standard" },
+    "2": { "price": 250, "vat_band": "zero" },
+    "3": { "price": 250, "vat_band": "zero" },
+    "4": { "price": 1000, "vat_band": "zero" },
+    "5": { "price": 1250, "vat_band": "standard" }
+  },
+  "vat_bands": {
+    "standard": 0.2,
+    "zero": 0
+  }
+}
