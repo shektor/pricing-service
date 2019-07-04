@@ -29,6 +29,25 @@ describe('Sale', () => {
 
       expect(sale.total()).toBe(750)
     })
+
+    it('returns order total for items with VAT', () => {
+      const order = {
+        items: [
+          {
+            product_id: 1,
+            quantity: 2
+          },
+          {
+            product_id: 4,
+            quantity: 3
+          }
+        ]
+      }
+
+      const sale = new Sale(order, pricing)
+
+      expect(sale.total()).toBe(4438)
+    })
   })
 
   describe('#jsonFormat', () => {

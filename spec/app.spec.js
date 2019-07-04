@@ -38,7 +38,7 @@ describe('POST /sales', () => {
 
     const sale = {
       'sale': {
-        'total': 2099
+        'total': 2219
       }
     }
 
