@@ -50,6 +50,15 @@ describe('Sale', () => {
     })
   })
 
+  describe('#calculateVAT', () => {
+    it('returns VAT value with standard arithmetic rounding', () => {
+      const sale = new Sale()
+      const vat = sale.calculateVAT(0.2, 599)
+
+      expect(vat).toBe(120)
+    })
+  })
+
   describe('#jsonFormat', () => {
     it('returns json formatted sale data', () => {
       const order = {

@@ -14,12 +14,16 @@ class Sale {
       const itemPrice = this.prices.product[item.product_id].price
 
       const netItemTotal = itemPrice * item.quantity
-      const vatItemTotal = Math.round(netItemTotal * vatMultiplier)
+      const vatTotal = this.calculateVAT(vatMultiplier, netItemTotal)
 
-      total += netItemTotal + vatItemTotal
+      total += netItemTotal + vatTotal
     })
 
     return total
+  }
+
+  calculateVAT (multiplier, value) {
+    return Math.round(multiplier * value)
   }
 
   jsonFormat () {
