@@ -13,6 +13,16 @@ class Sale {
 
     return total
   }
+
+  jsonFormat () {
+    let json = {
+      'sale': {
+        'total': this.total()
+      }
+    }
+
+    return json
+  }
 }
 
 module.exports = {

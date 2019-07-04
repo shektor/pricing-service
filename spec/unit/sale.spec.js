@@ -30,4 +30,31 @@ describe('Sale', () => {
       expect(sale.total()).toBe(750)
     })
   })
+
+  describe('#jsonFormat', () => {
+    it('returns json formatted sale data', () => {
+      const order = {
+        items: [
+          {
+            product_id: 2,
+            quantity: 1
+          },
+          {
+            product_id: 3,
+            quantity: 2
+          }
+        ]
+      }
+
+      const sale = new Sale(order, pricing)
+
+      const json = {
+        'sale': {
+          'total': 750
+        }
+      }
+
+      expect(sale.jsonFormat()).toEqual(json)
+    })
+  })
 })
