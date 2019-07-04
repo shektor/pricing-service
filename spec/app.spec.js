@@ -13,17 +13,32 @@ describe('GET /', () => {
   })
 })
 
-describe('POST /quotes', () => {
+describe('POST /sales', () => {
   test('it returns 201 with JSON echo', (done) => {
     let data = { 'order': {} }
 
     request(app)
-      .post('/quotes')
+      .post('/sales')
       .send(data)
       .set('Accept', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).toBe(201)
         expect(res.body).toEqual(data)
+
+        if (err) throw done(err)
+        done()
+      })
+  })
+
+  test('it returns 400 with invalid JSON request body', (done) => {
+    let data = {}
+
+    request(app)
+      .post('/sales')
+      .send(data)
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).toBe(400)
 
         if (err) throw done(err)
         done()
