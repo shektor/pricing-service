@@ -11,6 +11,7 @@ describe('Sale', () => {
     }
 
     const order = {
+      id: 1,
       currency: 'GBP',
       items: [
         {
@@ -82,6 +83,7 @@ describe('Sale', () => {
     it('returns json formatted sale data', () => {
       const json = {
         'sale': {
+          'order_id': 1,
           'total': 4438,
           'vat': 240,
           'currency': 'GBP',

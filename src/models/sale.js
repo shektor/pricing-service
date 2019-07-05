@@ -53,6 +53,7 @@ class Sale {
 
     const json = {
       'sale': {
+        'order_id': this.order.id,
         'total': this.total,
         'vat': this.vat,
         'currency': this.exchangeRate.currency,
