@@ -5,10 +5,13 @@ describe('Sale', () => {
   let sale
 
   beforeEach(() => {
-    const exchangeRate = 1
+    const exchangeRate = {
+      currency: 'GBP',
+      rate: 1
+    }
 
     const order = {
-      currency: "GBP",
+      currency: 'GBP',
       items: [
         {
           product_id: 1,
@@ -81,6 +84,7 @@ describe('Sale', () => {
         'sale': {
           'total': 4438,
           'vat': 240,
+          'currency': 'GBP',
           'items': [
             {
               'product_id': 1,
