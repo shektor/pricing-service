@@ -5,7 +5,10 @@ describe('Sale', () => {
   let sale
 
   beforeEach(() => {
+    const exchangeRate = 1
+
     const order = {
+      currency: "GBP",
       items: [
         {
           product_id: 1,
@@ -18,7 +21,7 @@ describe('Sale', () => {
       ]
     }
 
-    sale = new Sale(order, pricing)
+    sale = new Sale(order, pricing, exchangeRate)
   })
 
   describe('::new', () => {

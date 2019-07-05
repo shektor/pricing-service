@@ -1,10 +1,11 @@
 class Sale {
-  constructor (order, prices) {
+  constructor (order, prices, exchangeRate) {
     this.order = order
     this.prices = prices
     this.items = []
     this.total = 0
     this.vat = 0
+    this.exchangeRate = exchangeRate
   }
 
   priceItems () {
@@ -13,8 +14,9 @@ class Sale {
       const vatMultiplier = this.prices.vat_bands[vatBand]
 
       const itemPrice = this.prices.product[item.product_id].price
+      const itemPriceConverted = itemPrice * this.exchangeRate
 
-      const netItemTotal = itemPrice * item.quantity
+      const netItemTotal = itemPriceConverted * item.quantity
       const vatTotal = this.calculateVAT(vatMultiplier, netItemTotal)
 
       const itemPriced = {
