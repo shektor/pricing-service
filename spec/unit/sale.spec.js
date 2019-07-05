@@ -48,43 +48,12 @@ describe('Sale', () => {
     })
   })
 
-  describe('#total', () => {
-    it('returns order total for items with no VAT', () => {
-      const order = {
-        items: [
-          {
-            product_id: 2,
-            quantity: 1
-          },
-          {
-            product_id: 3,
-            quantity: 2
-          }
-        ]
-      }
+  describe('#addToTotal', () => {
+    it('adds to the total of sale', () => {
+      const sale = new Sale()
 
-      const sale = new Sale(order, pricing)
-
-      expect(sale.total()).toBe(750)
-    })
-
-    it('returns order total for items with VAT', () => {
-      const order = {
-        items: [
-          {
-            product_id: 1,
-            quantity: 2
-          },
-          {
-            product_id: 4,
-            quantity: 3
-          }
-        ]
-      }
-
-      const sale = new Sale(order, pricing)
-
-      expect(sale.total()).toBe(4438)
+      expect(sale.addToTotal(250)).toBe(250)
+      expect(sale.addToTotal(300)).toBe(550)
     })
   })
 
