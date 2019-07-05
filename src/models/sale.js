@@ -52,7 +52,8 @@ class Sale {
     const json = {
       'sale': {
         'total': this.total,
-        'vat': this.vat
+        'vat': this.vat,
+        'items': this.items
       }
     }
 

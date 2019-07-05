@@ -39,7 +39,30 @@ describe('POST /sales', () => {
     const sale = {
       'sale': {
         'total': 2219,
-        'vat': 120
+        'vat': 120,
+        'items': [
+          {
+            'product_id': 1,
+            'quantity': 1,
+            'price': 599,
+            'total': 719,
+            'vat': 120
+          },
+          {
+            'product_id': 2,
+            'quantity': 5,
+            'price': 250,
+            'total': 1250,
+            'vat': 0
+          },
+          {
+            'product_id': 3,
+            'quantity': 1,
+            'price': 250,
+            'total': 250,
+            'vat': 0
+          }
+        ]
       }
     }
 

@@ -77,7 +77,23 @@ describe('Sale', () => {
       const json = {
         'sale': {
           'total': 4438,
-          'vat': 240
+          'vat': 240,
+          'items': [
+            {
+              'product_id': 1,
+              'quantity': 2,
+              'price': 599,
+              'total': 1438,
+              'vat': 240
+            },
+            {
+              'product_id': 4,
+              'quantity': 3,
+              'price': 1000,
+              'total': 3000,
+              'vat': 0
+            }
+          ]
         }
       }
 
