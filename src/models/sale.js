@@ -14,7 +14,7 @@ class Sale {
       const vatMultiplier = this.prices.vat_bands[vatBand]
 
       const itemPrice = this.prices.product[item.product_id].price
-      const itemPriceConverted = itemPrice * this.exchangeRate
+      const itemPriceConverted = Math.round(itemPrice * this.exchangeRate)
 
       const netItemTotal = itemPriceConverted * item.quantity
       const vatTotal = this.calculateVAT(vatMultiplier, netItemTotal)
