@@ -76,7 +76,8 @@ describe('Sale', () => {
     it('returns json formatted sale data', () => {
       const json = {
         'sale': {
-          'total': 4438
+          'total': 4438,
+          'vat': 240
         }
       }
 

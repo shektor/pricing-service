@@ -27,6 +27,7 @@ class Sale {
 
       this.items.push(itemPriced)
       this.addToTotal(netItemTotal + vatTotal)
+      this.addToVAT(vatTotal)
     })
     return this.items
   }
@@ -50,7 +51,8 @@ class Sale {
 
     const json = {
       'sale': {
-        'total': this.total
+        'total': this.total,
+        'vat': this.vat
       }
     }
 
