@@ -2,31 +2,33 @@ const { Sale } = require('../../src/models/sale')
 const pricing = require('../../data/pricing')
 
 describe('Sale', () => {
+  let sale
+
+  beforeEach(() => {
+    const order = {
+      items: [
+        {
+          product_id: 1,
+          quantity: 2
+        },
+        {
+          product_id: 4,
+          quantity: 3
+        }
+      ]
+    }
+
+    sale = new Sale(order, pricing)
+  })
+
   describe('::new', () => {
     it('is an instance of Sale', () => {
-      const sale = new Sale()
-
       expect(sale).toBeInstanceOf(Sale)
     })
   })
 
   describe('#priceItems', () => {
     it('returns an array of priced items based on the order', () => {
-      const order = {
-        items: [
-          {
-            product_id: 1,
-            quantity: 2
-          },
-          {
-            product_id: 4,
-            quantity: 3
-          }
-        ]
-      }
-
-      const sale = new Sale(order, pricing)
-
       const pricedItems = [
         {
           'product_id': 1,
@@ -50,8 +52,6 @@ describe('Sale', () => {
 
   describe('#addToTotal', () => {
     it('adds to the total of sale', () => {
-      const sale = new Sale()
-
       expect(sale.addToTotal(250)).toBe(250)
       expect(sale.addToTotal(300)).toBe(550)
     })
@@ -59,7 +59,6 @@ describe('Sale', () => {
 
   describe('#calculateVAT', () => {
     it('returns VAT value with standard arithmetic rounding', () => {
-      const sale = new Sale()
       const vat = sale.calculateVAT(0.2, 599)
 
       expect(vat).toBe(120)
@@ -68,24 +67,9 @@ describe('Sale', () => {
 
   describe('#jsonFormat', () => {
     it('returns json formatted sale data', () => {
-      const order = {
-        items: [
-          {
-            product_id: 2,
-            quantity: 1
-          },
-          {
-            product_id: 3,
-            quantity: 2
-          }
-        ]
-      }
-
-      const sale = new Sale(order, pricing)
-
       const json = {
         'sale': {
-          'total': 750
+          'total': 4438
         }
       }
 
