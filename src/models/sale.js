@@ -4,6 +4,7 @@ class Sale {
     this.prices = prices
     this.items = []
     this.total = 0
+    this.vat = 0
   }
 
   priceItems () {
@@ -33,6 +34,11 @@ class Sale {
   addToTotal (value) {
     this.total += value
     return this.total
+  }
+
+  addToVAT (value) {
+    this.vat += value
+    return this.vat
   }
 
   calculateVAT (multiplier, value) {

@@ -57,6 +57,13 @@ describe('Sale', () => {
     })
   })
 
+  describe('#addToVAT', () => {
+    it('adds to the VAT of sale', () => {
+      expect(sale.addToVAT(20)).toBe(20)
+      expect(sale.addToVAT(40)).toBe(60)
+    })
+  })
+
   describe('#calculateVAT', () => {
     it('returns VAT value with standard arithmetic rounding', () => {
       const vat = sale.calculateVAT(0.2, 599)
