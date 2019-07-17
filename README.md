@@ -56,7 +56,6 @@ Assume the same VAT rates apply to all countries and currencies.
 ## Getting started
 
 ```bash
-> git clone git@github.com:shektor/pricing-service.git
 > cd pricing-service
 > npm install
 > npm start
@@ -80,7 +79,10 @@ A `POST` request needs to be sent to http://localhost:3000/sales with a body tha
 
 As an example you can use a curl request,
 ```bash
+# request
 curl -d '{"order":{"id":12345,"customer":{},"currency":"GBP","items":[{"product_id":1,"quantity":1},{"product_id":2,"quantity":5},{"product_id":3,"quantity":1}]}}' -H 'Content-Type: application/json' http://localhost:3000/sales
+# response
+{"sale":{"order_id":12345,"total":2219,"vat":120,"currency":"GBP","items":[{"product_id":1,"quantity":1,"price":599,"total":719,"vat":120},{"product_id":2,"quantity":5,"price":250,"total":1250,"vat":0},{"product_id":3,"quantity":1,"price":250,"total":250,"vat":0}]}}
 ```
 
 A request that includes the following order...
@@ -203,10 +205,30 @@ The API can also convert prices returned in the sale to a currency of your choic
 }
 ```
 
+## Potential Improvements?
+
+- The Sale class can be refactored greatly, especially the priceItems function.
+- A second class can be created to generate the sales JSON format to remove the presentation element.
+- An integration test is currently being skipped as I was unable to successfully implement in time a Jest mock for the call requesting the currency data. On the same note a test is missing for the forex connection.
+- There is currently no real validation of the order data being sent to API. I would implement validation on the data structure that is being passed, the data types for the order attributes, the items within the order and whether they exist in the pricing list.
+- With validation I would also implement further error handling so that the end user has a clear idea of why they did not get the intended response.
+
+## Challenges?
+
+- Mocking an external API call within a promise with Jest and Supertest
+
+## Most proud of?
+
+- Completing the pricing service API MVP
+
+## How to improve Take Home Test?
+
+- A explanation of the motivation and stakeholders for the pricing service.
+
 ## User Stories
 
 ```
-As a tails customer
+As a Tails order processor
 So that I can submit a request
 I would like an endpoint to submit my data
 
@@ -226,7 +248,7 @@ So that I can check the order was calculated correctly
 I would like to see the price for each item
 ```
 ```
-As a French tails customer
+As a French Tails order processor
 So that I can use the service in France
 I would like to provide a currency code
 
