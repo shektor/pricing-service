@@ -2,15 +2,15 @@ const { Sale } = require('../../src/models/sale')
 const pricing = require('../../data/pricing')
 
 describe('Sale', () => {
-  let sale
+  let sale, exchangeRate, order
 
   beforeEach(() => {
-    const exchangeRate = {
+    exchangeRate = {
       currency: 'GBP',
       rate: 1
     }
 
-    const order = {
+    order = {
       id: 1,
       currency: 'GBP',
       items: [
@@ -59,8 +59,28 @@ describe('Sale', () => {
 
   describe('#vatMultiplierFor', () => {
     it('returns VAT multiplier for product', () => {
-      expect(sale.vatMultiplierFor(1)).toBe(0.2)
-      expect(sale.vatMultiplierFor(4)).toBe(0)
+      const product_id = 1
+      expect(sale.vatMultiplierFor(product_id)).toBe(0.2)
+    })
+  })
+
+  describe('#priceOne', () => {
+    it('returns price of product in requested currency GBP', () => {
+      const product_id = 1
+
+      expect(sale.priceOne(product_id)).toBe(599)
+    })
+
+    it('returns price of product in requested currency USD', () => {
+      exchangeRate = {
+        currency: 'USD',
+        rate: 1.25
+      }
+
+      sale = new Sale(order, pricing, exchangeRate)
+      const product_id = 1
+
+      expect(sale.priceOne(product_id)).toBe(749)
     })
   })
 
@@ -80,9 +100,9 @@ describe('Sale', () => {
 
   describe('#calculateVAT', () => {
     it('returns VAT value with standard arithmetic rounding', () => {
-      const vat = sale.calculateVAT(0.2, 599)
+      const vat = sale.calculateVAT(0.2, 100)
 
-      expect(vat).toBe(120)
+      expect(vat).toEqual(20)
     })
   })
 

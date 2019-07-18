@@ -12,10 +12,9 @@ class Sale {
     this.order.items.forEach((item) => {
       const vatMultiplier = this.vatMultiplierFor(item.product_id)
 
-      const itemPrice = this.prices.product[item.product_id].price
-      const itemPriceConverted = Math.round(itemPrice * this.exchangeRate.rate)
+      const itemPrice = this.priceOne(item.product_id)
 
-      const netItemTotal = itemPriceConverted * item.quantity
+      const netItemTotal = itemPrice * item.quantity
       const vatTotal = this.calculateVAT(vatMultiplier, netItemTotal)
 
       const itemPriced = {
@@ -39,6 +38,13 @@ class Sale {
     return multiplier
   }
 
+  priceOne (product_id) {
+    const price = this.prices.product[product_id].price
+    const priceConverted = Math.round(price * this.exchangeRate.rate)
+
+    return priceConverted
+  }
+
   addToTotal (value) {
     this.total += value
     return this.total
@@ -50,7 +56,8 @@ class Sale {
   }
 
   calculateVAT (multiplier, value) {
-    return Math.round(multiplier * value)
+    const vat = Math.round(multiplier * value)
+    return vat
   }
 
   jsonFormat () {
