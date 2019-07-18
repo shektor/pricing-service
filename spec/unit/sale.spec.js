@@ -57,6 +57,13 @@ describe('Sale', () => {
     })
   })
 
+  describe('#vatMultiplierFor', () => {
+    it('returns VAT multiplier for product', () => {
+      expect(sale.vatMultiplierFor(1)).toBe(0.2)
+      expect(sale.vatMultiplierFor(4)).toBe(0)
+    })
+  })
+
   describe('#addToTotal', () => {
     it('adds to the total of sale', () => {
       expect(sale.addToTotal(250)).toBe(250)

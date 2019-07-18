@@ -10,8 +10,7 @@ class Sale {
 
   priceItems () {
     this.order.items.forEach((item) => {
-      const vatBand = this.prices.product[item.product_id].vat_band
-      const vatMultiplier = this.prices.vat_bands[vatBand]
+      const vatMultiplier = this.vatMultiplierFor(item.product_id)
 
       const itemPrice = this.prices.product[item.product_id].price
       const itemPriceConverted = Math.round(itemPrice * this.exchangeRate.rate)
@@ -32,6 +31,12 @@ class Sale {
       this.addToVAT(vatTotal)
     })
     return this.items
+  }
+
+  vatMultiplierFor (product_id) {
+    const band = this.prices.product[product_id].vat_band
+    const multiplier = this.prices.vat_bands[band]
+    return multiplier
   }
 
   addToTotal (value) {
