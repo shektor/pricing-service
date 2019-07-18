@@ -1,9 +1,9 @@
-const forex = require('../../src/connections/forex')
+const apiConnect = require('../../src/connections/apiConnect')
 const axios = require('axios')
 
 jest.mock('axios')
 
-describe('forex', () => {
+describe('api', () => {
   let currencyData, response
 
   beforeEach(() => {
@@ -24,12 +24,12 @@ describe('forex', () => {
 
   describe('fetchData', () => {
     it('returns a axios.get() promise that resolves with forex data', () => {
-      return forex.fetchData()
+      return apiConnect.fetchData()
         .then(data => expect(data).toEqual(currencyData))
     })
 
     it('passes url parameter to axios.get()', async () => {
-      await forex.fetchData('url')
+      await apiConnect.fetchData('url')
 
       expect(axios.get).toHaveBeenCalledWith('url')
     })

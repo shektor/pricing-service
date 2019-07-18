@@ -7,7 +7,7 @@ function fetchData(url) {
         return response.data
       }
     }).catch((error) => {
-      console.log('Currency API error: ', error.message)
+      console.log('Request error: ', error.message)
     })
 }
 

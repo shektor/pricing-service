@@ -1,4 +1,4 @@
-const forex = require('./connections/forex')
+const apiConnect = require('./connections/apiConnect')
 const pricing = require('../data/pricing')
 const { Sale } = require('./models/sale')
 const express = require('express')
@@ -7,7 +7,7 @@ const app = express()
 let forexData
 const url = 'https://api.exchangeratesapi.io/latest?base=GBP'
 
-forex.fetchData(url)
+apiConnect.fetchData(url)
   .then(data => forexData = data)
 
 app.use(express.json())
