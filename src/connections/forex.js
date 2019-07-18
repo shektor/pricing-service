@@ -1,7 +1,6 @@
 const axios = require('axios')
-const url = 'https://api.exchangeratesapi.io/latest?base=GBP'
 
-function fetchData() {
+function fetchData(url) {
   return axios.get(url)
     .then((response) => {
       if(response.status === 200) {

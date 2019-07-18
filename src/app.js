@@ -5,9 +5,10 @@ const express = require('express')
 const app = express()
 
 let forexData
+const url = 'https://api.exchangeratesapi.io/latest?base=GBP'
 
-forex.fetchData()
-  .then(data => forexData = data )
+forex.fetchData(url)
+  .then(data => forexData = data)
 
 app.use(express.json())
 
@@ -21,7 +22,6 @@ app.post('/sales', (req, res) => {
       currency: content.order.currency,
       rate: forexData.rates[content.order.currency]
     }
-
     let sale = new Sale(content.order, pricing, exchangeRate)
 
     return res.status(201).send(sale.jsonFormat())
