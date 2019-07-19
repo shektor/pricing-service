@@ -15,14 +15,15 @@ app.use(express.json())
 app.get('/', (req, res) => res.send('Pricing Service'))
 
 app.post('/sales', (req, res) => {
-  let content = req.body
+  const content = req.body
 
   if (content.order) {
-    let exchangeRate = {
+    const exchangeRate = {
       currency: content.order.currency,
       rate: forexData.rates[content.order.currency]
     }
-    let sale = new Sale(content.order, pricing, exchangeRate)
+    const sale = new Sale(content.order, pricing, exchangeRate)
+    sale.priceItems()
 
     return res.status(201).send(sale.jsonFormat())
   }

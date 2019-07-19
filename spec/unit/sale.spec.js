@@ -141,6 +141,8 @@ describe('Sale', () => {
         }
       }
 
+      sale.priceItems()
+
       expect(sale.jsonFormat()).toEqual(json)
     })
   })

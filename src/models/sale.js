@@ -69,8 +69,6 @@ class Sale {
   }
 
   jsonFormat () {
-    this.priceItems()
-
     const json = {
       'sale': {
         'order_id': this.order.id,
