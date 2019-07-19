@@ -17,16 +17,18 @@ class Sale {
       const netItemTotal = itemPrice * item.quantity
       const vatTotal = this.calculateVAT(vatMultiplier, netItemTotal)
 
+      const itemTotal = this.twoDecimalPlace(netItemTotal + vatTotal)
+
       const itemPriced = {
         'product_id': item.product_id,
         'quantity': item.quantity,
         'price': itemPrice,
-        'total': netItemTotal + vatTotal,
+        'total': itemTotal,
         'vat': vatTotal
       }
 
       this.items.push(itemPriced)
-      this.addToTotal(netItemTotal + vatTotal)
+      this.addToTotal(itemTotal)
       this.addToVAT(vatTotal)
     })
     return this.items
@@ -39,25 +41,31 @@ class Sale {
   }
 
   priceOne (product_id) {
-    const price = this.prices.product[product_id].price
-    const priceConverted = Math.round(price * this.exchangeRate.rate)
+    const priceInGBP = this.prices.product[product_id].price / 100
+    const priceConverted = this.twoDecimalPlace(priceInGBP * this.exchangeRate.rate)
 
     return priceConverted
   }
 
   addToTotal (value) {
-    this.total += value
+    this.total = this.twoDecimalPlace(this.total + value)
     return this.total
   }
 
   addToVAT (value) {
-    this.vat += value
+    this.vat = this.twoDecimalPlace(this.vat + value)
     return this.vat
   }
 
   calculateVAT (multiplier, value) {
-    const vat = Math.round(multiplier * value)
+    const vat = this.twoDecimalPlace(multiplier * value)
     return vat
+  }
+
+  twoDecimalPlace (value) {
+    const fixedString = value.toFixed(2)
+    const parsedBack = parseFloat(fixedString)
+    return parsedBack
   }
 
   jsonFormat () {

@@ -40,15 +40,15 @@ describe('Sale', () => {
         {
           'product_id': 1,
           'quantity': 2,
-          'price': 599,
-          'total': 1438,
-          'vat': 240
+          'price': 5.99,
+          'total': 14.38,
+          'vat': 2.40
         },
         {
           'product_id': 4,
           'quantity': 3,
-          'price': 1000,
-          'total': 3000,
+          'price': 10,
+          'total': 30,
           'vat': 0
         }
       ]
@@ -68,7 +68,7 @@ describe('Sale', () => {
     it('returns price of product in requested currency GBP', () => {
       const product_id = 1
 
-      expect(sale.priceOne(product_id)).toBe(599)
+      expect(sale.priceOne(product_id)).toEqual(5.99)
     })
 
     it('returns price of product in requested currency USD', () => {
@@ -80,7 +80,7 @@ describe('Sale', () => {
       sale = new Sale(order, pricing, exchangeRate)
       const product_id = 1
 
-      expect(sale.priceOne(product_id)).toBe(749)
+      expect(sale.priceOne(product_id)).toEqual(7.49)
     })
   })
 
@@ -106,27 +106,35 @@ describe('Sale', () => {
     })
   })
 
+  describe('#twoDecimalPlace', () => {
+    it('returns a value fixed to 2 decimal places, rounding if required', () => {
+      const value = 3.966
+
+      expect(sale.twoDecimalPlace(value)).toEqual(3.97)
+    })
+  })
+
   describe('#jsonFormat', () => {
     it('returns json formatted sale data', () => {
       const json = {
         'sale': {
           'order_id': 1,
-          'total': 4438,
-          'vat': 240,
+          'total': 44.38,
+          'vat': 2.4,
           'currency': 'GBP',
           'items': [
             {
               'product_id': 1,
               'quantity': 2,
-              'price': 599,
-              'total': 1438,
-              'vat': 240
+              'price': 5.99,
+              'total': 14.38,
+              'vat': 2.4
             },
             {
               'product_id': 4,
               'quantity': 3,
-              'price': 1000,
-              'total': 3000,
+              'price': 10,
+              'total': 30,
               'vat': 0
             }
           ]
